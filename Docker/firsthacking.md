@@ -1,10 +1,22 @@
-# FirstHacking Write Up
+<section align="center">
+
+# 💥FirstHacking Write Up💥
+
+![Dificultad](https://img.shields.io/badge/Dificultad-Muy%20Facil-green?style=for-the-badge)
+![Plataforma](https://img.shields.io/badge/Plataforma-DockerLabs-blue?style=for-the-badge)
+
+</section>
+
+## 🚀 Despliegue
 
 Una vez descargado el ctf, lo extreamos y accedemos a su respectiva carpeta desde la terminal, luego iniciamos la maquina con:
 
 ```bash
 sudo bash auto_deploy.sh firsthacking.tar
 ```
+
+## 🔍Escaneo y enumeracion
+
 para empezar con el ctf, realizamos un escaneo general con nmap:
 
 ```bash
@@ -23,7 +35,6 @@ PORT   STATE SERVICE
 
 Nmap done: 1 IP address (1 host up) scanned in 0.22 seconds
 ```
-
 
 aunque ya nos hacemos una idea de que puerto esta abierto, que seria el 21 con el servico **ftp**, pueden haber mas servicios en los puertos no comunes, para una mayor precision, podemos realizar un escaneo a todos los puertos:
 
@@ -73,9 +84,14 @@ Service detection performed. Please report any incorrect results at https://nmap
 Nmap done: 1 IP address (1 host up) scanned in 5.74 seconds
 ```
 <br>
+
+## Pequeño analisis e investigacion sobre la version 2.3.4 de vsftpd
+
 en este escaneo obtenemos informacion muy importante, ya que investigando sobre esa version,es antigua y con una vulnerabilidad critica conocida.
   
 De aqui, tenemos dos caminos posibles, uno es usar una herramienta que automatiza el ataque y otra es hacerlo manualmente, yo lo hare manualmente.
+
+## ☠️Explotacion
 
 El primer paso para atacar manualmente este servicio, debemos entender que esta vulnerabilidad fue provocada de forma conciente, ya que la idea es que al poner ":)" en el usuario al intentar conectarte al servicio ftp, se iniciaria otro servicio ftp en el puerto 6200 con usuario root.
 
